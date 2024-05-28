@@ -8,32 +8,27 @@ class SecondScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final itemSelectionViewModel = ref.watch(itemSelectionProvider);
+    final selectedItems = itemSelectionViewModel.selectedList;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second Screen'),
       ),
-      body: Consumer(
-        builder: (context, watch, _) {
-          final selectedItems = itemSelectionViewModel.selectedList;
-
-          return ListView.separated(
-            itemCount: selectedItems.length,
-            separatorBuilder: (_, __) => const Divider(),
-            itemBuilder: (context, index) {
-              final item = selectedItems[index];
-              return ListTile(
-                title: Text(item.text),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                  ),
-                  onPressed: () {
-                    ref.read(itemSelectionProvider).removeItem(item);
-                  },
-                ),
-              );
-            },
+      body: ListView.separated(
+        itemCount: selectedItems.length,
+        separatorBuilder: (_, __) => const Divider(),
+        itemBuilder: (context, index) {
+          final item = selectedItems[index];
+          return ListTile(
+            title: Text(item.text),
+            trailing: IconButton(
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                ref.read(itemSelectionProvider).removeItem(item);
+              },
+            ),
           );
         },
       ),

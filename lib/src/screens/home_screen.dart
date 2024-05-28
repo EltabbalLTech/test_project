@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       text: 'List tile',
     ),
   ];
+
   final List<AppModel> selectedItems = [];
 
   @override
@@ -70,18 +71,20 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      floatingActionButton: Consumer(builder: (context, ref, _) {
-        return FloatingActionButton(
-          onPressed: () {
-            ref.read(itemSelectionProvider).addItems(selectedItems);
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SecondScreen()),
-            );
-          },
-          child: const Icon(Icons.navigate_next),
-        );
-      }),
+      floatingActionButton: Consumer(
+        builder: (context, ref, _) {
+          return FloatingActionButton(
+            onPressed: () {
+              ref.read(itemSelectionProvider).addItems(selectedItems);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SecondScreen()),
+              );
+            },
+            child: const Icon(Icons.navigate_next),
+          );
+        },
+      ),
     );
   }
 }
